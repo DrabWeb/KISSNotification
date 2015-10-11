@@ -1,2 +1,2 @@
 # KISSNotification
-A KISS notification dialog system for OSX 
+A KISS notification dialog system for OSX
