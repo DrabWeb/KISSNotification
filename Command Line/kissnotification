@@ -1,10 +1,10 @@
 #!/bin/bash
-# $1 - Image
-# $2 - Header
-# $3 - Info
-# $4 - Duration
-# $5 - Sound
-# $6 - Corner
+# $1 - Image (350x150)
+# $2 - Header (The bold text)
+# $3 - Info (The info text below the header)
+# $4 - Duration (How many seconds the dialog should stay up)
+# $5 - Sound (What sound to play)
+# $6 - Corner (The corner it should be in (1 == Top Left, 2 == Top Right, 3 == Bottom Left, 4 == Bottom Right)
 
 # Set all the variables
 IMAGE=$1
