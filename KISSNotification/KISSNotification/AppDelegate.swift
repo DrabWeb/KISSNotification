@@ -266,6 +266,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if(windowSquare) {
             // Fade out the square window
             squareWindow.animator().alphaValue = 0;
+            window.animator().alphaValue = 0;
         }
         // If not...
         else {
