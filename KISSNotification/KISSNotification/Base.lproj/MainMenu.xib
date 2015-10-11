@@ -15,9 +15,9 @@
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="KISSNotification" customModuleProvider="target">
             <connections>
                 <outlet property="notificationEffectView" destination="VYP-h2-62y" id="iZc-4j-ZpM"/>
-                <outlet property="notificationHeader" destination="Ubv-SF-5vw" id="EU2-xf-bTt"/>
+                <outlet property="notificationHeader" destination="jkn-aM-QT3" id="V6Z-hM-Pus"/>
                 <outlet property="notificationImage" destination="vrr-Ac-5jS" id="Ax7-pD-vOk"/>
-                <outlet property="notificationInfo" destination="t6y-dD-AYk" id="St9-Xk-cK5"/>
+                <outlet property="notificationInfo" destination="XXA-CW-WbR" id="dgm-zS-ioq"/>
                 <outlet property="window" destination="nc9-rX-Qyt" id="Sdl-R5-mou"/>
             </connections>
         </customObject>
@@ -685,27 +685,6 @@
                 <subviews>
                     <visualEffectView appearanceType="vibrantLight" fixedFrame="YES" blendingMode="behindWindow" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="VYP-h2-62y">
                         <rect key="frame" x="0.0" y="0.0" width="350" height="150"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t6y-dD-AYk">
-                                <rect key="frame" x="150" y="0.0" width="202" height="92"/>
-                                <animations/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="7pY-B0-5IH">
-                                    <font key="font" metaFont="titleBar"/>
-                                    <string key="title">OTHER TEXT THAT YOU WANT TO DISPLAY WITH THIS NOTIFIACTION. OTHER TEXT THAT YOU WANT TO DISPLAY WITH THIS NOTIFIACTION. OTHER TEXT THAT YOU WANT TO DISPLAY WITH THIS NOTIFIACTION. OTHER TEXT THAT YOU WANT TO DISPLAY WITH THIS NOTIFIACTION. OTHER TEXT THAT YOU WANT TO DISPLAY WITH THIS NOTIFIACTION. </string>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ubv-SF-5vw">
-                                <rect key="frame" x="150" y="100" width="202" height="30"/>
-                                <animations/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="HEADER" id="m8I-xw-DQG">
-                                    <font key="font" metaFont="systemBold" size="20"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
                         <animations/>
                     </visualEffectView>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vrr-Ac-5jS">
@@ -713,6 +692,25 @@
                         <animations/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="left" imageScaling="proportionallyUpOrDown" image="NSRefreshFreestandingTemplate" id="ct0-2z-nNg"/>
                     </imageView>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XXA-CW-WbR">
+                        <rect key="frame" x="150" y="0.0" width="202" height="92"/>
+                        <animations/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="wq5-ti-ZWE">
+                            <font key="font" metaFont="titleBar"/>
+                            <string key="title">OTHER TEXT THAT YOU WANT TO DISPLAY WITH THIS NOTIFIACTION. OTHER TEXT THAT YOU WANT TO DISPLAY WITH THIS NOTIFIACTION. OTHER TEXT THAT YOU WANT TO DISPLAY WITH THIS NOTIFIACTION. OTHER TEXT THAT YOU WANT TO DISPLAY WITH THIS NOTIFIACTION. OTHER TEXT THAT YOU WANT TO DISPLAY WITH THIS NOTIFIACTION. </string>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jkn-aM-QT3">
+                        <rect key="frame" x="150" y="100" width="202" height="30"/>
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="HEADER" id="8Wh-iE-yhb">
+                            <font key="font" metaFont="systemBold" size="20"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
                 <animations/>
             </view>
