@@ -18,6 +18,11 @@
                 <outlet property="notificationHeader" destination="jkn-aM-QT3" id="V6Z-hM-Pus"/>
                 <outlet property="notificationImage" destination="vrr-Ac-5jS" id="Ax7-pD-vOk"/>
                 <outlet property="notificationInfo" destination="XXA-CW-WbR" id="dgm-zS-ioq"/>
+                <outlet property="squareNotificationEffectView" destination="uqB-U0-knb" id="gzS-Oq-LDw"/>
+                <outlet property="squareNotificationHeader" destination="skn-if-Lw9" id="kM9-2q-tGH"/>
+                <outlet property="squareNotificationImage" destination="E8M-oa-rBm" id="61Q-fT-gCA"/>
+                <outlet property="squareNotificationInfo" destination="rhq-mJ-kZN" id="wlk-t8-4iy"/>
+                <outlet property="squareWindow" destination="7uS-nQ-FFj" id="kWS-im-JpQ"/>
                 <outlet property="window" destination="nc9-rX-Qyt" id="Sdl-R5-mou"/>
             </connections>
         </customObject>
@@ -671,7 +676,7 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="NSWindow Messing" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="nc9-rX-Qyt" userLabel="Notification" customClass="NotificationWindow" customModule="KISSNotification" customModuleProvider="target">
+        <window title="NSWindow Messing" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="nc9-rX-Qyt" userLabel="Notification Rectangle" customClass="NotificationWindow" customModule="KISSNotification" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <windowCollectionBehavior key="collectionBehavior" canJoinAllSpaces="YES" ignoresCycle="YES" fullScreenAuxiliary="YES"/>
             <windowPositionMask key="initialPositionMask" rightStrut="YES" bottomStrut="YES"/>
@@ -690,7 +695,7 @@
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vrr-Ac-5jS">
                         <rect key="frame" x="0.0" y="0.0" width="350" height="150"/>
                         <animations/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="left" imageScaling="proportionallyUpOrDown" image="NSRefreshFreestandingTemplate" id="ct0-2z-nNg"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSRefreshFreestandingTemplate" id="ct0-2z-nNg"/>
                     </imageView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XXA-CW-WbR">
                         <rect key="frame" x="150" y="0.0" width="202" height="92"/>
@@ -715,6 +720,50 @@
                 <animations/>
             </view>
             <point key="canvasLocation" x="320" y="256"/>
+        </window>
+        <window title="NSWindow Messing" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="7uS-nQ-FFj" userLabel="Notification Square" customClass="NotificationWindow" customModule="KISSNotification" customModuleProvider="target">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
+            <windowCollectionBehavior key="collectionBehavior" canJoinAllSpaces="YES" ignoresCycle="YES" fullScreenAuxiliary="YES"/>
+            <windowPositionMask key="initialPositionMask" rightStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="0.0" y="0.0" width="200" height="200"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1600" height="900"/>
+            <value key="minSize" type="size" width="350" height="150"/>
+            <value key="maxSize" type="size" width="350" height="150"/>
+            <view key="contentView" wantsLayer="YES" id="9LV-hr-NXN">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <visualEffectView appearanceType="vibrantLight" fixedFrame="YES" blendingMode="behindWindow" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="uqB-U0-knb">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                        <animations/>
+                    </visualEffectView>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E8M-oa-rBm">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                        <animations/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSRefreshFreestandingTemplate" id="2h2-qk-BrS"/>
+                    </imageView>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rhq-mJ-kZN">
+                        <rect key="frame" x="0.0" y="4" width="196" height="20"/>
+                        <animations/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="INFO TEXT" id="YEH-3P-DWm">
+                            <font key="font" metaFont="titleBar"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="skn-if-Lw9">
+                        <rect key="frame" x="-2" y="20" width="204" height="30"/>
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="HEADER" id="zpP-RR-eCW">
+                            <font key="font" metaFont="systemBold" size="20"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+                <animations/>
+            </view>
+            <point key="canvasLocation" x="229" y="505"/>
         </window>
     </objects>
     <resources>

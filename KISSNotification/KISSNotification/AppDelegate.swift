@@ -11,6 +11,7 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
+    // The rectangular notification stuff
     // The main window that holds all the notification stuff
     @IBOutlet weak var window: NotificationWindow!
     
@@ -25,6 +26,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // The visual effect view for the background of the notification
     @IBOutlet weak var notificationEffectView: NSVisualEffectView!
+    
+    // The square notification stuff
+    // The main window that holds all the notification stuff
+    @IBOutlet weak var squareWindow: NotificationWindow!
+    
+    // The image view for the notification
+    @IBOutlet weak var squareNotificationImage: NSImageView!
+    
+    // The text field for the header of the notification
+    @IBOutlet weak var squareNotificationHeader: NSTextField!
+    
+    // The text field for the info text field in the notification
+    @IBOutlet weak var squareNotificationInfo: NSTextField!
+    
+    // The visual effect view for the background of the notification
+    @IBOutlet weak var squareNotificationEffectView: NSVisualEffectView!
+    
+    // Is the window square?
+    var windowSquare : Bool = false;
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
@@ -41,6 +61,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Line 4 == Duration
         // Line 5 == Sound
         // Line 6 == Corner
+        // Line 7 == Square (true/false)
         let notificationSettings : [NSString] = fileContent.characters.split{$0 == "\n"}.map(String.init);
         print(notificationSettings.count);
         
@@ -54,16 +75,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let notifDuration : UInt32 = UInt32(notificationSettings[3].integerValue);
         var notifSound : NSSound = NSSound();
         let notifCorner : UInt32 = UInt32(notificationSettings[5].integerValue);
+        var notifSquare : Bool = false;
+        
+        // See if the dialog should be square
+        if(notificationSettings[6] == "false") {
+            notifSquare = false;
+        }
+        else {
+            notifSquare = true;
+        }
         
         // Load the sound
         if(notificationSettings[4] != "none") {
             notifSound = NSSound(contentsOfURL: NSURL(fileURLWithPath: notificationSettings[4] as String), byReference: false)!;
         }
         
-        sendNotification(notifImage, header: notifHeader, infoText: notifInfo, duration: notifDuration, sound: notifSound, corner: notifCorner);
+        sendNotification(notifImage, header: notifHeader, infoText: notifInfo, duration: notifDuration, sound: notifSound, corner: notifCorner, square: notifSquare);
     }
     
     func setup() {
+        // Set up the rectangular window
         // Set the window opacity to zero
         window.alphaValue = 0;
         
@@ -96,58 +127,151 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Hide the window again
         window.close();
+        
+        // Setup the square window
+        // Set the window opacity to zero
+        squareWindow.alphaValue = 0;
+        
+        // Shadow fixing...
+        squareWindow.orderFrontRegardless();
+        
+        // Hide the window
+        squareWindow.close();
+        
+        // Set the effect material
+        squareNotificationEffectView.material = NSVisualEffectMaterial.MediumLight;
+        
+        // Set the style mask
+        squareWindow.styleMask = NSTitledWindowMask | NSFullSizeContentViewWindowMask | NSClosableWindowMask;
+        
+        // Hide the titlebar
+        squareWindow.standardWindowButton(NSWindowButton.CloseButton)?.superview?.superview?.removeFromSuperview();
+        
+        // Ignore mouse events
+        squareWindow.ignoresMouseEvents = true;
+        
+        // Set the background color to clear
+        squareWindow.backgroundColor = NSColor.clearColor();
+        
+        // Allow the window to be transparent
+        squareWindow.opaque = false;
+        
+        // Set the level so it floats above all others
+        squareWindow.level = 100;
+        
+        // Hide the window again
+        squareWindow.close();
     }
     
-    func sendNotification(image : NSImage, header : NSString, infoText : NSString, duration : UInt32, sound : NSSound, corner : UInt32) {
+    func sendNotification(image : NSImage, header : NSString, infoText : NSString, duration : UInt32, sound : NSSound, corner : UInt32, square : Bool) {
         // Create the variable for the notification window rect
         var rect : NSRect = NSRect();
         
-        // Check what corner it should be in
-        // 1 == Top Left
-        // 2 == Top Right
-        // 3 == Bottom Left
-        // 4 == Bottom Right
-        if(corner == 1) {
-            rect = NSRect(x: 44, y: ((NSScreen.mainScreen()?.frame.height)! - 44) - window.frame.height, width: window.frame.width, height: window.frame.height);
+        // If we are showing the square window...
+        if(square) {
+            // Say that we are doing a square notification
+            windowSquare = true;
+            
+            // Check what corner it should be in
+            // 1 == Top Left
+            // 2 == Top Right
+            // 3 == Bottom Left
+            // 4 == Bottom Right
+            if(corner == 1) {
+                rect = NSRect(x: 44, y: ((NSScreen.mainScreen()?.frame.height)! - 44) - squareWindow.frame.height, width: squareWindow.frame.width, height: squareWindow.frame.height);
+            }
+            else if(corner == 2) {
+                rect = NSRect(x: ((NSScreen.mainScreen()?.frame.width)! - 44) - squareWindow.frame.width, y: ((NSScreen.mainScreen()?.frame.height)! - 44) - squareWindow.frame.height, width: squareWindow.frame.width, height: squareWindow.frame.height);
+            }
+            else if(corner == 3) {
+                rect = NSRect(x: 44, y: 44, width: squareWindow.frame.width, height: squareWindow.frame.height);
+            }
+            else if(corner == 4) {
+                rect = NSRect(x: ((NSScreen.mainScreen()?.frame.width)! - 44) - squareWindow.frame.width, y: 44, width: squareWindow.frame.width, height: squareWindow.frame.height);
+            }
+            
+            // Set the window frame so it is in the proper corner
+            squareWindow.setFrame(rect, display: false);
+            
+            // Set the image
+            squareNotificationImage.image = image;
+            
+            // Set the header
+            squareNotificationHeader.stringValue = String(header);
+            
+            // Set the info
+            squareNotificationInfo.stringValue = String(infoText);
+            
+            // Bring forward the window
+            squareWindow.orderFrontRegardless();
+            
+            // Play the sound
+            sound.play();
+            
+            // Fade in the window
+            squareWindow.animator().alphaValue = 1;
         }
-        else if(corner == 2) {
-            rect = NSRect(x: ((NSScreen.mainScreen()?.frame.width)! - 44) - window.frame.width, y: ((NSScreen.mainScreen()?.frame.height)! - 44) - window.frame.height, width: window.frame.width, height: window.frame.height);
+        // If its rectangular...
+        else {
+            // Say that we are not doing a square notification
+            windowSquare = true;
+            
+            // Check what corner it should be in
+            // 1 == Top Left
+            // 2 == Top Right
+            // 3 == Bottom Left
+            // 4 == Bottom Right
+            if(corner == 1) {
+                rect = NSRect(x: 44, y: ((NSScreen.mainScreen()?.frame.height)! - 44) - window.frame.height, width: window.frame.width, height: window.frame.height);
+            }
+            else if(corner == 2) {
+                rect = NSRect(x: ((NSScreen.mainScreen()?.frame.width)! - 44) - window.frame.width, y: ((NSScreen.mainScreen()?.frame.height)! - 44) - window.frame.height, width: window.frame.width, height: window.frame.height);
+            }
+            else if(corner == 3) {
+                rect = NSRect(x: 44, y: 44, width: window.frame.width, height: window.frame.height);
+            }
+            else if(corner == 4) {
+                rect = NSRect(x: ((NSScreen.mainScreen()?.frame.width)! - 44) - window.frame.width, y: 44, width: window.frame.width, height: window.frame.height);
+            }
+            
+            // Set the window frame so it is in the proper corner
+            window.setFrame(rect, display: false);
+            
+            // Set the image
+            notificationImage.image = image;
+            
+            // Set the header
+            notificationHeader.stringValue = String(header);
+            
+            // Set the info
+            notificationInfo.stringValue = String(infoText);
+            
+            // Bring forward the window
+            window.orderFrontRegardless();
+            
+            // Play the sound
+            sound.play();
+            
+            // Fade in the window
+            window.animator().alphaValue = 1;
         }
-        else if(corner == 3) {
-            rect = NSRect(x: 44, y: 44, width: window.frame.width, height: window.frame.height);
-        }
-        else if(corner == 4) {
-            rect = NSRect(x: ((NSScreen.mainScreen()?.frame.width)! - 44) - window.frame.width, y: 44, width: window.frame.width, height: window.frame.height);
-        }
         
-        // Set the window frame so it is in the proper corner
-        window.setFrame(rect, display: false);
-        
-        // Set the image
-        notificationImage.image = image;
-        
-        // Set the header
-        notificationHeader.stringValue = String(header);
-        
-        // Set the info
-        notificationInfo.stringValue = String(infoText);
-        
-        // Bring forward the window
-        window.orderFrontRegardless();
-        
-        // Play the sound
-        sound.play();
-        
-        // Fade in the window
-        window.animator().alphaValue = 1;
         
         // Set the timer
         var alarm = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(duration), target:self, selector: Selector("closeNotificationWindow"), userInfo: nil, repeats:false);
     }
     
     func closeNotificationWindow() {
-        // Fade out the window
-        window.animator().alphaValue = 0;
+        // If we showed a square window...
+        if(windowSquare) {
+            // Fade out the square window
+            squareWindow.animator().alphaValue = 0;
+        }
+        // If not...
+        else {
+            // Fade out the rectangular window
+            window.animator().alphaValue = 0;
+        }
         
         var alarm = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(1), target:self, selector: Selector("quitSelf"), userInfo: nil, repeats:false);
     }
